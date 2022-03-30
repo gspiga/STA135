@@ -1,0 +1,39 @@
+---
+title: "HW1 - STA 135"
+author: "Gianni Spiga"
+date: "3/29/2022"
+output: html_document
+---
+
+
+
+### Problem 1.6
+# a.)
+```{r}
+airpol <-
+  read.csv("~/GitHub/STA135/Homework/HW1/Air-Pollution Data G.C.Tao.csv",
+           header = TRUE)
+library(ggplot2)
+library(ggExtra)
+
+colnames <- names(airpol)
+for (i in colnames[-1]){
+  print(ggMarginal(ggplot(airpol, aes_string(x = "Wind..x1.", y = i)) + geom_point(color = 'firebrick'), type = 'histogram', fill = 'dodgerblue'))
+
+}
+
+```
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
