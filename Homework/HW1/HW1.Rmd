@@ -19,16 +19,21 @@ library(ggExtra)
 colnames <- names(airpol)
 for (i in colnames[-1]){
   print(ggMarginal(ggplot(airpol, aes_string(x = "Wind..x1.", y = i)) + geom_point(color = 'firebrick'), type = 'histogram', fill = 'dodgerblue'))
-
 }
-
 ```
+# b.)
+```{r}
+#xbar, mean vector
+colMeans(airpol[sapply(airpol, is.numeric)]) 
 
-```{r cars}
-summary(cars)
+#Sn, the COV/VAR marix
+cov(airpol)
+
+# R the correlation matrix
+cor(airpol)
 ```
+We can see that none of the variables have a very high correlation. We can see the highest correlation in our data is between Carbon Monoxide (CO) and Nitrogen Dioxide (NO2) of 0.557. We also can see that Wind is negatively correlated with all pollutants. 
 
-## Including Plots
 
 You can also embed plots, for example:
 
