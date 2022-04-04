@@ -86,7 +86,7 @@ dOP2
 ```
 ## P 1.18
 ```{r}
-
+WomenRun <- read.csv("~/Github/STA135/Homework/HW1/National Track Records for Women.csv", header =  TRUE)
 
 ```
 
