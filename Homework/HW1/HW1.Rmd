@@ -7,21 +7,26 @@ output: html_document
 
 
 
-### Problem 1.6
-# a.)
+## Problem 1.6
+### a.)
 ```{r}
 airpol <-
   read.csv("~/GitHub/STA135/Homework/HW1/Air-Pollution Data G.C.Tao.csv",
            header = TRUE)
 library(ggplot2)
 library(ggExtra)
+library(GGally)
 
+#Pairwise plots
+ggpairs(airpol)
+
+#Marginal plots
 colnames <- names(airpol)
 for (i in colnames[-1]){
   print(ggMarginal(ggplot(airpol, aes_string(x = "Wind..x1.", y = i)) + geom_point(color = 'firebrick'), type = 'histogram', fill = 'dodgerblue'))
 }
 ```
-# b.)
+### b.)
 ```{r}
 #xbar, mean vector
 colMeans(airpol[sapply(airpol, is.numeric)]) 
@@ -35,10 +40,53 @@ cor(airpol)
 We can see that none of the variables have a very high correlation. We can see the highest correlation in our data is between Carbon Monoxide (CO) and Nitrogen Dioxide (NO2) of 0.557. We also can see that Wind is negatively correlated with all pollutants. 
 
 
-You can also embed plots, for example:
+## Problem 1.9
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+#a.)
+library(plotly)
+x1 <- c(-6, -3, -2, 1, 2, 5, 6, 8)
+x2 <- c(-2, -3, 1, -1, 2, 1, 5, 3)
+mydata <- data.frame(x1, x2)
+
+#ggplot(aes(x = x1, y = x2)) + geom_point()
+fig <- plot_ly(mydata, x = ~x1, y = ~x2)
+fig
+
+cov(mydata)
+```
+```{r}
+#b.) 
+#Formula pdf page 56
+
+# x1~ = x1 costheta + x2 sintheta
+x1tilde = x1 * 0.899 + x2 * 0.438
+
+# x2~ = -x1 sintheta + x2 costheta
+x2tilde = -x1 * 0.438 + x2 * 0.899
+
+#c 
+datatilde = data.frame(x1tilde, x2tilde)
+var(datatilde)
+
+#d
+newx1 = 4 * 0.899 + -2 * 0.438
+newx2 = -4 * 0.438 + -2 * 0.899
+
+dOP = sqrt((newx1^2/28.462) + (newx2^2/2.022))
+dOP
+
+#e
+#From footnote
+a11 = (0.899^2/(0.899^2 * 23.411 + 2 * 0.438 * 0.899 * 10.393 + 0.438^2 * 7.071)) + (0.438^2/ (0.899^2 * 7.071 + 2 * 0.438 * 0.899 + 0.438^2 * 23.411))
+a22 = (0.438^2 / (0.899^2 * 23.411 + 2 * 0.438 * 0.899 * 10.393 + 0.438^2 * 7.071)) + (0.899^2 / (0.899^2 * 7.071 + 2 * 0.438 * 0.899 + 0.438^2 * 23.411))
+a12 = (0.438 * 0.899 / (0.899^2 * 23.411 + 2 * 0.438 * 0.899 * 10.393 + 0.438^2 * 7.071)) + ((0.438 * 0.899)/ (0.899^2 * 7.071 + 2 * 0.438 * 0.899 + 0.438^2 * 23.411))
+dOP2 = sqrt(a11 * newx1^2 + 2*a12 * newx1 * newx2 + a22 * newx2^2)
+dOP2
+```
+## P 1.18
+```{r}
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
