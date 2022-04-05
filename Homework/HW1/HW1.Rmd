@@ -32,10 +32,11 @@ for (i in colnames[-1]){
 colMeans(airpol[sapply(airpol, is.numeric)]) 
 
 #Sn, the COV/VAR marix
-cov(airpol)
+n = nrow(airpol)
+cov(airpol) * (n-1)/n
 
 # R the correlation matrix
-cor(airpol)
+round(cor(airpol),2)
 ```
 We can see that none of the variables have a very high correlation. We can see the highest correlation in our data is between Carbon Monoxide (CO) and Nitrogen Dioxide (NO2) of 0.557. We also can see that Wind is negatively correlated with all pollutants. 
 
@@ -53,8 +54,15 @@ mydata <- data.frame(x1, x2)
 fig <- plot_ly(mydata, x = ~x1, y = ~x2)
 fig
 
-cov(mydata)
+n = nrow(mydata)
+myvarmat = cov(mydata) * (n-1)/n
+myvarmat
+s11 = myvarmat[1]
+s12 = myvarmat[2]
+s22 = myvarmat[4]
 ```
+
+
 ```{r}
 #b.) 
 #Formula pdf page 56
@@ -67,7 +75,8 @@ x2tilde = -x1 * 0.438 + x2 * 0.899
 
 #c 
 datatilde = data.frame(x1tilde, x2tilde)
-var(datatilde)
+n = nrow(datatilde)
+diag(var(datatilde))  #* (n-1)/n)
 
 #d
 newx1 = 4 * 0.899 + -2 * 0.438
@@ -78,15 +87,27 @@ dOP
 
 #e
 #From footnote
-a11 = (0.899^2/(0.899^2 * 23.411 + 2 * 0.438 * 0.899 * 10.393 + 0.438^2 * 7.071)) + (0.438^2/ (0.899^2 * 7.071 + 2 * 0.438 * 0.899 + 0.438^2 * 23.411))
-a22 = (0.438^2 / (0.899^2 * 23.411 + 2 * 0.438 * 0.899 * 10.393 + 0.438^2 * 7.071)) + (0.899^2 / (0.899^2 * 7.071 + 2 * 0.438 * 0.899 + 0.438^2 * 23.411))
-a12 = (0.438 * 0.899 / (0.899^2 * 23.411 + 2 * 0.438 * 0.899 * 10.393 + 0.438^2 * 7.071)) + ((0.438 * 0.899)/ (0.899^2 * 7.071 + 2 * 0.438 * 0.899 + 0.438^2 * 23.411))
-dOP2 = sqrt(a11 * newx1^2 + 2*a12 * newx1 * newx2 + a22 * newx2^2)
+a11 = (0.899^2/(0.899^2 * s11 + 2 * 0.438 * 0.899 * s12 + 0.438^2 * s22)) + (0.438^2/ (0.899^2 * s22 - 2 * 0.438 * 0.899 * s12 + 0.438^2 * s11))
+
+a22 = (0.438^2 / (0.899^2 * s11 + 2 * 0.438 * 0.899 *s12 + 0.438^2 * s22)) + (0.899^2 / (0.899^2 * s22 - 2 * 0.438 * 0.899*s12 + 0.438^2 * s11))
+
+a12 = ((0.438 * 0.899) / (0.899^2 * s11 + 2 * 0.438 * 0.899 * s12 + 0.438^2 * s22)) - ((0.438 * 0.899)/ (0.899^2 * s22 - 2 * 0.438 * 0.899 * s12 + 0.438^2 * s11))
+
+dOP2 = sqrt((a11 * 16) + (2*a12 * 4 * -2) + (a22 * 4))
 dOP2
 ```
+We can see that within rounding error, these two distances are about the same. 
+
 ## P 1.18
 ```{r}
-WomenRun <- read.csv("~/Github/STA135/Homework/HW1/National Track Records for Women.csv", header =  TRUE)
+WomenTrack <- read.csv("~/Github/STA135/Homework/HW1/National Track Records for Women.csv", header =  TRUE)
+WomenTrack
+
+#First, convert last 4 columns into seconds 
+WomenTrack[,5:8] = WomenTrack[, 5:8] * 60
+WomenTrack
+
+#Second, divide each column by respective meters to get meters per second
 
 ```
 
