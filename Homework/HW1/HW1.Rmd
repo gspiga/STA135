@@ -353,4 +353,45 @@ d <- matrix(c(-1,3,-2,1), nrow= 4, ncol = 1)
 LHS <- as.numeric((t(b) %*% d)^2)
 RHS <- as.numeric((t(b) %*% b) %*% (t(d) %*% d))
 LHS > RHS
- ```
+```
+
+## Problem 9
+P 3.16 
+Proved by hand
+ 
+
+## Problem 10
+P 3.18
+
+```{r}
+#a.)
+xbar = c(0.766, 0.508, 0.438, 0.161)
+cat("The sample mean is", mean(xbar))
+S = matrix(c(
+  0.856,
+  0.635,
+  0.173,
+  0.096,
+  0.635,
+  0.568,
+  0.128,
+  0.067,
+  0.173,
+  0.127,
+  0.171,
+  0.039,
+  0.096,
+  0.067,
+  0.039,
+  0.043), nrow = 4, ncol = 4, byrow = TRUE
+)
+
+#Variance of total energy consumption is determinant of covariance matrix pg 124
+det(S)
+
+#b.)
+cat("Sample mean of excess petroleum consumption over natural gas:", (0.766 + 0.438)/2)
+
+cat("Sample variance of excess petroleum consumption over natural gas:", var(c(0.766, 0.438)))
+
+```
