@@ -390,8 +390,10 @@ S = matrix(c(
 det(S)
 
 #b.)
-cat("Sample mean of excess petroleum consumption over natural gas:", (0.766 + 0.438)/2)
+cat("Sample mean of excess petroleum consumption over natural gas:", (0.766 + 0.508)/2, "\n") 
 
-cat("Sample variance of excess petroleum consumption over natural gas:", var(c(0.766, 0.438)))
+cat("Sample variance of excess petroleum consumption over natural gas:", var(c(0.766, 0.508)))
+
+
 
 ```
