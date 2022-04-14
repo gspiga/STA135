@@ -344,6 +344,55 @@ P 2.12
 ## Problem 7
 P 2.30
 
+a.) $E(X^{(1)}) = [4,3]^T$
+b.) $E(AX^{(2)}) = $
+
+```{r}
+# b.)
+A = matrix(c(1, 2), nrow = 1, ncol =2)
+EX1 = matrix(c(4, 3), nrow = 2, ncol = 1)
+A %*% EX1
+```
+c.) $$ Cov(X^{(1)}) = \begin{pmatrix}
+3  & 0\\
+0 & 1 \\
+\end{pmatrix} $$
+d.) $Cov(AX^{(1)}) = $
+```{r}
+covx1 = matrix(c(3, 0, 0, 1), nrow = 2, ncol = 2)
+A %*% covx1 %*% t(A)
+```
+
+e.) $E(X^{(1)}) = [2,1]^T$
+
+f.)
+```{r}
+EX2 = matrix(c(2, 1), nrow = 2, ncol = 1)
+B = matrix(c(1, 2, -2, -1), nrow = 2, ncol =2)
+B %*% EX2
+```
+g.) $$ Cov(X^{(2)}) = \begin{pmatrix}
+9  & -2\\
+-2 & 4 \\
+\end{pmatrix} $$
+
+h.)
+```{r}
+covx2 = matrix(c(9, -2, -2, 4), nrow = 2, ncol = 2)
+B %*% covx2 %*% t(B)
+
+```
+i.)$$ Cov(X^{(1)},X^{(2)}) = \begin{pmatrix}
+2  & 2\\
+1 & 0 \\
+\end{pmatrix} $$
+
+j.)
+```{r}
+covx1x2 = matrix(c(2, 1, 2,0), nrow= 2, ncol = 2)
+A %*% covx1x2 %*% t(B)
+```
+
 ## Problem 8
 P 2. 34
 ```{r}
