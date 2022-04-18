@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.17)  17 APR 2022 00:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.17)  17 APR 2022 22:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -431,25 +431,14 @@ Package pdftex.def Info: HW1_files/figure-latex/unnamed-chunk-1-1.pdf  used on i
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [1
 
-{c:/Users/Gianni/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<HW1_files/figure-latex/unnamed-chunk-2-1.pdf, id=22, 469.755pt x 325.215pt>
-File: HW1_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
-<use HW1_files/figure-latex/unnamed-chunk-2-1.pdf>
-Package pdftex.def Info: HW1_files/figure-latex/unnamed-chunk-2-1.pdf  used on input line 152.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 152--154
-[][]
- []
-
-[2 <./HW1_files/figure-latex/unnamed-chunk-1-1.pdf>] [3 <./HW1_files/figure-latex/unnamed-chunk-2-1.pdf>] [4] [5] [6] [7] [8] [9] [10]
+{c:/Users/Gianni/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./HW1_files/figure-latex/unnamed-chunk-1-1.pdf>] [3] [4] [5] [6] [7] [8] [9]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 696.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 696.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 696.
-[11]
+[10]
 Runaway argument?
  &= 0 \\ 
 ! Paragraph ended before \align* was complete.
@@ -458,10 +447,10 @@ Runaway argument?
 l.777 
        
 Here is how much of TeX's memory you used:
- 11018 strings out of 480198
- 174405 string characters out of 5891582
- 474845 words of memory out of 5000000
- 28803 multiletter control sequences out of 15000+600000
+ 11012 strings out of 480198
+ 174070 string characters out of 5891582
+ 477498 words of memory out of 5000000
+ 28797 multiletter control sequences out of 15000+600000
  509503 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,14n,63p,1122b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s

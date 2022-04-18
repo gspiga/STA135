@@ -142,15 +142,15 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{#Marginal plots}
-\NormalTok{colnames <-}\StringTok{ }\KeywordTok{names}\NormalTok{(airpol)}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ colnames[}\OperatorTok{-}\DecValTok{1}\NormalTok{])\{}
-  \KeywordTok{print}\NormalTok{(}\KeywordTok{ggMarginal}\NormalTok{(}\KeywordTok{ggplot}\NormalTok{(airpol, }\KeywordTok{aes_string}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Wind..x1."}\NormalTok{, }\DataTypeTok{y =}\NormalTok{ i)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{color =} \StringTok{'firebrick'}\NormalTok{), }\DataTypeTok{type =} \StringTok{'histogram'}\NormalTok{, }\DataTypeTok{fill =} \StringTok{'dodgerblue'}\NormalTok{))}
-\NormalTok{\}}
+\CommentTok{# colnames <- names(airpol)}
+\CommentTok{# for (i in colnames[-1])\{}
+\CommentTok{#   print(ggMarginal(ggplot(airpol, aes_string(x = "Wind..x1.", y = i)) + geom_point(color = 'firebrick'), type = 'histogram', fill = 'dodgerblue'))}
+\CommentTok{# \}}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{HW1_files/figure-latex/unnamed-chunk-2-1.pdf} \#\#\#
-b.)
+\hypertarget{b.}{%
+\subsubsection{b.)}\label{b.}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1142,6 +1142,129 @@ and covariance
 \end{pmatrix} = 3.5
 \]
 
-\$\$
+\hypertarget{problem-12-p4.13}{%
+\subsection{Problem 12 P4.13}\label{problem-12-p4.13}}
+
+See hand written
+
+\hypertarget{problem-13-p4.16}{%
+\subsection{Problem 13 P4.16}\label{problem-13-p4.16}}
+
+a.) Both \(V_1\) and \(V_2\) are linear combinations of \(X_i\) so we
+can infer they are both distributed multivariate normal. We have means
+
+\[
+E(V_1) = \frac{1}{4}E(X_1) - \frac{1}{4}E(X_2) + \frac{1}{4}E(X_3) - \frac{1}{4}E(X_4) = 0
+\] and \[
+E(V_2) = \frac{1}{4}E(X_1) + \frac{1}{4}E(X_2 - frac{1}{4}E(X_3) - \frac{1}{4}E(X_4) = 0
+\] and covariances \[
+Cov(V_1) = \frac{1}{16}Cov(X_1) + \frac{1}{16}Cov(X_2) + \frac{1}{16}Cov(X_3) + \frac{1}{16}Cov(X_4) = \frac{1}{4}\Sigma
+\] and \[
+Cov(V_2) = \frac{1}{16}Cov(X_1) + \frac{1}{16}Cov(X_2) + \frac{1}{16}Cov(X_3) + \frac{1}{16}Cov(X_4) = \frac{1}{4}\Sigma
+\] b.) \[
+Cov(V_1, V_2) = \frac{1}{16}Cov(X_1) - \frac{1}{16}Cov(X_2) - \frac{1}{16}Cov(X_3) + \frac{1}{16}Cov(X_4) = 0
+\] \[
+\begin{pmatrix}
+\frac{1}{4}\Sigma & 0 \\
+0 &   \frac{1}{4}\Sigma \\
+\end{pmatrix}
+\] Thus forming joint density: \[
+f(V_1, V_2) = \frac{1}{(2\pi)^p|\Sigma|} exp(-\frac{1}{2}V_1^T\frac{1}{4}1/4\Sigma - \frac{1}{2} V_2^T1/4\Sigma^{-1}V_2)
+\]
+
+\hypertarget{problem-14-p4.19}{%
+\subsection{Problem 14 P4.19}\label{problem-14-p4.19}}
+
+a.) The distribution of \((X_1 - \mu)'\Sigma(X_1 - \mu)\) is chi squared
+with degrees of freedom = 6. (pg 176)
+
+b.) The distribution of \(\bar{X}\) is a normal distribution with mean
+\(\mu\) with covariance \(\frac{1}{n}\Sigma\) or in this case
+\(\frac{1}{20}\Sigma\). The distribution of \(\sqrt{n}(\bar{X} - \mu)\)
+is also normal but now with mean 0 and covariance \(\Sigma\). (page
+176).
+
+c.) The distribution of \((n - 1)S\) is distributed as a Wishart random
+matrix with degrees of freedom = n - 1 - 19. (pg 174)
+
+\hypertarget{problem-15-p4.36}{%
+\subsection{Problem 15 P4.36}\label{problem-15-p4.36}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plotly)}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ Marathon)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Marathon"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ X100m.s.)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"100 m/sec"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ X200m.s.)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"200 m/sec"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ X400m.s.)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"400 m/sec"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ X800m.min.)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"800 m/sec"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ X1500m.min.)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"1500 m/sec"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(WomenTrack, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ X3000m.min.)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"3000 m/sec"}\NormalTok{)}
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mvoutlier)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: sgeostat
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{chisq.plot}\NormalTok{(WomenTrack[,}\OperatorTok{-}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-17-8.pdf}
+
+\begin{verbatim}
+## Remove outliers with left-click, stop with right-click on plotting device
+\end{verbatim}
+
+\begin{verbatim}
+## $outliers
+## NULL
+\end{verbatim}
 
 \end{document}

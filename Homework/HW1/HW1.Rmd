@@ -4,14 +4,14 @@ author: "Gianni Spiga"
 date: "3/29/2022"
 always_allow_html: true
 output:
-  pdf_document: default
-  html_document: default
   
+  html_document: default
+  pdf_document: default
 ---
 
 
 
-## Problem 1.6
+## Problem 1  P1.6
 ### a.)
 ```{r}
 airpol <-
@@ -26,10 +26,10 @@ ggpairs(airpol)
 ```
 ```{r}
 #Marginal plots
-colnames <- names(airpol)
-for (i in colnames[-1]){
-  print(ggMarginal(ggplot(airpol, aes_string(x = "Wind..x1.", y = i)) + geom_point(color = 'firebrick'), type = 'histogram', fill = 'dodgerblue'))
-}
+# colnames <- names(airpol)
+# for (i in colnames[-1]){
+#   print(ggMarginal(ggplot(airpol, aes_string(x = "Wind..x1.", y = i)) + geom_point(color = 'firebrick'), type = 'histogram', fill = 'dodgerblue'))
+# }
 
 ```
 ### b.)
@@ -47,7 +47,7 @@ round(cor(airpol),2)
 We can see that none of the variables have a very high correlation. We can see the highest correlation in our data is between Carbon Monoxide (CO) and Nitrogen Dioxide (NO2) of 0.557. We also can see that Wind is negatively correlated with all pollutants. 
 
 
-## Problem 1.9
+## Problem 2 P1.9
 
 ```{r}
 #a.)
@@ -104,7 +104,7 @@ dOP2
 ```
 We can see that within rounding error, these two distances are about the same. 
 
-## P 1.18
+## Problem 3 P1.18
 ```{r}
 WomenTrack <- read.csv("~/Github/STA135/Homework/HW1/National Track Records for Women.csv", header =  TRUE)
 #WomenTrack
@@ -132,7 +132,7 @@ cor(WomenTrack[,-1])
 ```
 We can see that as a runner travels more distance, the correlation between their 100m other distances decreases. However, the correlation with their marathon rate increases. 
 
-#Problem 2.2
+## Problem 4 P2.2
 ```{r}
 A = matrix(c(-1, 3, 4, 2),
            nrow = 2,
@@ -156,7 +156,7 @@ t(C) %*% B
 # Dimensions for these matricies are not aligned
 # A %*% B
 ```
-## P 2.3
+### P 2.3
 ```{r}
 A = matrix(c(2, 1, 1, 3),
            nrow = 2,
@@ -193,15 +193,16 @@ $$
 
 Since we can see that both sides of the equation $(AB)_{ji} = (AB)^T_{ij}$ equal the same summation. We can conclude that in the general case the transpose of the product of $A$ and $B$ is equal to the product of $A^T$ and $B^T$. 
 
-## P 2.4
+### P 2.4
 a.)
 
 \begin{align*}
-(A^{-1})^T &= (A^{-1})^TA^T(A^T)^{-1} \\
- &=(AA^{-1})^T(A^T)^{-1} \\
+(A^{-1})^T &= (A^{-1})^ TA^T(A^T)^{-1}
+&=(AA^{-1})^T(A^T)^{-1} \\
 &=I^T(A^T)^{-1} \\
 &= (A^T)^{-1} \\
 \end{align*}
+
 
 
 b.)
@@ -215,7 +216,7 @@ b.)
 \end{align*}
 
 
-## Problem 5
+## Problem 5 P2.8
 $$
 A = \begin{pmatrix}
 1 & 2 \\
@@ -346,15 +347,13 @@ The spectral decomposition thus is
 
 
 
-## Problem 6
-P 2.11
-
+## Problem 6 P 2.11
 See by hand
 
-P 2.12
+### P 2.12
+See by hand
 
-## Problem 7
-P 2.30
+## Problem 7 P2.30
 
 a.) $E(X^{(1)}) = [4,3]^T$
 b.) $E(AX^{(2)}) = $
@@ -412,8 +411,7 @@ covx1x2 = matrix(c(2, 1, 2,0), nrow= 2, ncol = 2)
 A %*% covx1x2 %*% t(B)
 ```
 
-## Problem 8
-P 2. 34
+## Problem 8 P2.34
 ```{r}
 b <- matrix(c(2, -1, 4,0), nrow= 4, ncol = 1)
 d <- matrix(c(-1,3,-2,1), nrow= 4, ncol = 1)
@@ -423,13 +421,11 @@ RHS <- as.numeric((t(b) %*% b) %*% (t(d) %*% d))
 LHS > RHS
 ```
 
-## Problem 9
-P 3.16 
+## Problem 9 P3.16 
 Proved by hand
  
 
-## Problem 10
-P 3.18
+## Problem 10 P3.18
 
 ```{r}
 #a.)
@@ -468,7 +464,7 @@ cat("Sample variance of excess petroleum consumption over natural gas:", 0.635)
 
 ```
 
-## Problem 11 4.2
+## Problem 11 P4.2
 c.)
 ```{r}
 library(MASS)
@@ -520,8 +516,80 @@ $$
 -1 \\
 \end{pmatrix} = 3.5
 $$
-```{r}
+
+## Problem 12 P4.13
+
+See hand written
 
 
-```
+## Problem 13 P4.16
+
+a.) Both $V_1$ and $V_2$ are linear combinations of $X_i$ so we can infer they are both distributed multivariate normal. We have means
+
 $$
+E(V_1) = \frac{1}{4}E(X_1) - \frac{1}{4}E(X_2) + \frac{1}{4}E(X_3) - \frac{1}{4}E(X_4) = 0
+$$
+and 
+$$
+E(V_2) = \frac{1}{4}E(X_1) + \frac{1}{4}E(X_2 - frac{1}{4}E(X_3) - \frac{1}{4}E(X_4) = 0
+$$
+and covariances 
+$$
+Cov(V_1) = \frac{1}{16}Cov(X_1) + \frac{1}{16}Cov(X_2) + \frac{1}{16}Cov(X_3) + \frac{1}{16}Cov(X_4) = \frac{1}{4}\Sigma
+$$
+and 
+$$
+Cov(V_2) = \frac{1}{16}Cov(X_1) + \frac{1}{16}Cov(X_2) + \frac{1}{16}Cov(X_3) + \frac{1}{16}Cov(X_4) = \frac{1}{4}\Sigma
+$$
+b.)
+$$
+Cov(V_1, V_2) = \frac{1}{16}Cov(X_1) - \frac{1}{16}Cov(X_2) - \frac{1}{16}Cov(X_3) + \frac{1}{16}Cov(X_4) = 0
+$$
+$$
+\begin{pmatrix}
+\frac{1}{4}\Sigma & 0 \\
+0 &   \frac{1}{4}\Sigma \\
+\end{pmatrix}
+$$
+Thus forming joint density: 
+$$
+f(V_1, V_2) = \frac{1}{(2\pi)^p|\Sigma|} exp(-\frac{1}{2}V_1^T\frac{1}{4}1/4\Sigma - \frac{1}{2} V_2^T1/4\Sigma^{-1}V_2)
+$$
+
+## Problem 14 P4.19
+
+a.) The distribution of $(X_1 - \mu)'\Sigma(X_1 - \mu)$ is chi squared with degrees of freedom = 6. (pg 176)
+
+b.) The distribution of $\bar{X}$ is a normal distribution with mean $\mu$ with covariance $\frac{1}{n}\Sigma$ or in this case $\frac{1}{20}\Sigma$. The distribution of $\sqrt{n}(\bar{X} - \mu)$ is also normal but now with mean 0 and covariance $\Sigma$. (page 176).
+
+c.) The distribution of $(n - 1)S$ is distributed as a Wishart random matrix with degrees of freedom = n - 1 - 19. (pg 174)
+
+## Problem 15 P4.36
+```{r}
+library(plotly)
+p <- ggplot(WomenTrack, aes(sample = Marathon)) + geom_qq() + geom_qq_line() + labs(title = "Marathon")
+ggplotly(p)
+
+
+p <- ggplot(WomenTrack, aes(sample = X100m.s.)) + geom_qq() + geom_qq_line() + labs(title = "100 m/sec")
+ggplotly(p)
+
+p <- ggplot(WomenTrack, aes(sample = X200m.s.)) + geom_qq() + geom_qq_line() + labs(title = "200 m/sec")
+ggplotly(p)
+
+p <- ggplot(WomenTrack, aes(sample = X400m.s.)) + geom_qq() + geom_qq_line() + labs(title = "400 m/sec")
+ggplotly(p)
+
+
+p <- ggplot(WomenTrack, aes(sample = X800m.min.)) + geom_qq() + geom_qq_line() + labs(title = "800 m/sec")
+ggplotly(p)
+
+p <- ggplot(WomenTrack, aes(sample = X1500m.min.)) + geom_qq() + geom_qq_line() + labs(title = "1500 m/sec")
+ggplotly(p)
+
+p <- ggplot(WomenTrack, aes(sample = X3000m.min.)) + geom_qq() + geom_qq_line() + labs(title = "3000 m/sec")
+ggplotly(p)
+
+library(mvoutlier)
+chisq.plot(WomenTrack[,-1])
+```
