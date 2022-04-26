@@ -7,32 +7,31 @@ output: html_document
 
 # Problem 3
 
+a.)
 ```{r}
-scores <- read.table("~/GitHub/STA135/Homework/HW2/T5-2.dat",
-           header = TRUE)
+scores <- read.table("~/GitHub/STA135/Homework/HW2/T5-2.dat")
 
 meanalt <- c(500, 50, 30)
 
 library(DescTools)
-HotellingsT2Test(scores, mu = meanalt)
+HotellingsT2Test(scores, mu = meanalt, test = 'chi')
+
+#Finding the critical point
+
+n = nrow(scores)
+p = ncol(scores)
+
+Fstat = qf(0.05, p, n - p, lower.tail =  FALSE)
+critval <- ((n -1) * p) / (n - p) * Fstat
+
 ```
+Given that our $T^2$ value is much larger than our critical value as well as our p-value is extremely close to zero, we reject $H_0$. We have reason to believe that students are scoring differently than the reported average scores. 
 
-## R Markdown
+b.)
+```{r}
+S <- cov(scores)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+eigVal <-eigen(S)$values 
+eigVec <- eigen(S)$vectors
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
