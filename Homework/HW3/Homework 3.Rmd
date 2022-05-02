@@ -1,0 +1,42 @@
+---
+title: "Homework 3"
+author: "Gianni Spiga"
+date: "5/1/2022"
+output: html_document
+---
+
+### Problem 1 
+6.1.)
+```{r}
+#pg 359
+effluent <- read.table("~/GitHub/STA135/Homework/HW3/T6-1.dat")
+colnames(effluent) <- c("x1BOD","x2SS","x3BOD","x4SS")
+
+
+#statistical differences from textbook
+meanDiff <- c(-9.36, 13.27)
+S <- matrix(c(199.26, 88.38, 88.38, 418.61), nrow = 2, ncol=2)
+n <- 11
+
+library(ellipse)
+region <- ellipse(S/11, centre = meanDiff, level = 0.95)
+plot(region, type = 'l')
+```
+Since our value of $\delta = 0$ does not fall into our 95% confidence region, we reject $H_0 = 0$. 
+\newline
+6.2.) 
+```{r}
+bonf <- qt(1 - (0.05 / (2 * 2)), n - 1)
+
+BOD_dff_ci <-
+  c(meanDiff[1] - bonf * sqrt(S[1, 1] / n), meanDiff[1] + bonf * sqrt(S[1, 1] /
+                                                                        n))
+
+SS_dff_ci <-
+  c(meanDiff[2] - bonf * sqrt(S[2, 2] / n), meanDiff[2] + bonf * sqrt(S[2, 2] /n))
+
+
+cat("The Bonferroni corrected confidence interval for the BOD is ", BOD_dff_ci, "\n")
+cat("The Bonferroni corrected confidence interval for the SS is ", SS_dff_ci, "\n")
+```
+Since $\delta = 0$ falls in both of these Bonferroni corrected confidence intervals, we fail to reject $H_0 = 0$ in this case. 
