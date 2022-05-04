@@ -2,7 +2,9 @@
 title: "STA 135 - Homework 2"
 author: "Gianni Spiga"
 date: "4/20/2022"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 # Problem 3
@@ -30,8 +32,60 @@ Given that our $T^2$ value is much larger than our critical value as well as our
 b.)
 ```{r}
 S <- cov(scores)
-
-eigVal <-eigen(S)$values 
+eigVal <- eigen(S)$values
 eigVec <- eigen(S)$vectors
 
+
+
+cat("The directions of the corresponding axis are \n")
+eigVec
+cat("\n")
+cat("The lengths of the axis are \n")
+sqrt(eigVal) * sqrt((1/n) * critval)
+
 ```
+c.)
+```{r}
+qqnorm(scores[,1]); qqline(scores[,1])
+qqnorm(scores[,2]); qqline(scores[,2])
+qqnorm(scores[,3]); qqline(scores[,3]) 
+
+library(ggplot2)
+library(ggExtra)
+library(GGally)
+
+#Pairwise plots
+ggpairs(scores)
+
+```
+\newline
+
+# Problem 4
+P 5.21 
+```{r}
+bone <- read.table("~/GitHub/STA135/Homework/HW2/T1-8.dat")
+bone
+
+#Bonferroni
+tstat <- qt(0.05/(2*ncol(bone)), nrow(bone) - 1) 
+tstat
+
+upperBon <- colMeans(bone) - tstat * sqrt(diag(var(bone))/nrow(bone))
+lowerBon <- colMeans(bone) + tstat * sqrt(diag(var(bone))/nrow(bone))
+
+bonf <- matrix(c(lowerBon, upperBon), nrow= 6, ncol = 2)
+bonf
+
+n <- nrow(bone)
+p <- ncol(bone)
+
+# T^2 Interval
+T2stat <- sqrt((p * (n- 1))/(n- p) * qf(0.05, p, n - p, lower.tail = FALSE))
+
+lowerT2 <- colMeans(bone) - T2stat * sqrt(diag(var(bone))/nrow(bone))
+upperT2 <- colMeans(bone) + T2stat * sqrt(diag(var(bone))/nrow(bone))
+
+T2int <- matrix(c(lowerT2, upperT2), nrow= 6, ncol = 2)
+T2int
+```
+We can see in this example, that the intervals for our simultaneous Bonferroni intervals are more narrow than the simulataneous $T^2$ intervals. 
