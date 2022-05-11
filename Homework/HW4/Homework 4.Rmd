@@ -47,6 +47,8 @@ xbar
 # print('+')
 # matrix(c(2,-2,-1), nrow = 3, ncol =5)
 ```
+
+
 $$
 x_{1j} = \begin{pmatrix}
 4 & 4 & 4 & 4 & 4 \\
@@ -77,10 +79,13 @@ x_{2j} = \begin{pmatrix}
 -1 & 2 & 0 & -1 &\\
 \end{pmatrix}
 $$
+
 b.)
 Variable 1
 ```{r}
 mat1 <- rbind(tr1[1,], c(tr2[1,], rep(0, 2)), c(tr3[1,], 0))
+mat1
+
 SSobs1 <- sum(mat1 ^ 2)
 SSobs1
 
@@ -193,3 +198,83 @@ qf(0.01, df1 = 2 * nrow(tr1), df2 = 2 *(12 - nrow(tr1) - 2), lower.tail = FALSE)
 
 Since our critical value is less than our test statistic, we reject $H_0$ when $\alpha = 0.01$. We have statistical evidence to conclude at least one $\tau_i$ is not 0. 
 
+Barlett's correction
+```{r}
+#Test statistic
+- (12 - 1 - ((nrow(tr1) + nrow(mat1))/2)) * log(WLambda)
+
+#Critical Value
+qchisq(0.01, df = nrow(tr1) * (nrow(mat1)-1), lower.tail = FALSE)
+
+```
+Since our critical value is once again less than our test statistic, we reject $H_0$. This conclusion lines up with the conclusion we made using Wilk's Lambda. 
+While both are adequite in the case of small sample sizes, Bartlett's correction improves accuracy for large sample sizes. 
+
+P2
+6.13.)
+
+```{r}
+tr1 <- matrix(c(6, 4, 8, 2, 3, -3, 4, -4, -3, -4, 3, -4), nrow = 3, ncol = 4, byrow = TRUE)
+tr1
+
+tr2 <- matrix(c(8,6,12,6,8,2,3,3,2,-5,-3,-6), nrow = 3, ncol = 4, byrow = TRUE)
+tr2
+
+xbar1 <- mean(tr1)
+xbar1
+
+xbar2 <- mean(tr2)
+xbar2
+
+xbar <- matrix(xbar1, nrow = 3, ncol = 4)
+xbar
+
+factef1 <- rowMeans(tr1) - matrix(xbar1, nrow = 3, ncol = 4)
+factef1
+
+factef2 <- matrix(c(rep(colMeans(tr1) - xbar1, 3)), nrow = 3, ncol = 4, byrow = TRUE) 
+factef2
+
+resid1 <- tr1 - factef1 - factef2 - xbar
+resid1
+
+```
+
+```{r}
+tr1 <- matrix(c(6, 4, 8, 2, 3, -3, 4, -4, -3, -4, 3, -4), nrow = 3, ncol = 4, byrow = TRUE)
+tr1
+
+tr2 <- matrix(c(8,6,12,6,8,2,3,3,2,-5,-3,-6), nrow = 3, ncol = 4, byrow = TRUE)
+tr2
+
+xbar1 <- mean(tr1)
+xbar1
+
+xbar2 <- mean(tr2)
+xbar2
+
+xbar <- matrix(xbar1, nrow = 3, ncol = 4)
+xbar
+
+factef1 <- rowMeans(tr1) - matrix(xbar1, nrow = 3, ncol = 4)
+factef1
+
+factef2 <- matrix(c(rep(colMeans(tr1) - xbar1, 3)), nrow = 3, ncol = 4, byrow = TRUE) 
+factef2
+
+resid1 <- tr1 - factef1 - factef2 - xbar
+resid1
+
+
+SSmean1 <- sum(xbar)
+SSmean1
+
+SSfac1 <- sum(factef1^2)
+SSfac1
+
+SSfac2 <- sum(factef2^2)
+SSfac2
+
+SSres <- sum(resid1 ^2)
+SSres
+```
