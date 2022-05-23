@@ -70,9 +70,84 @@ stock
 cov(stock)
 
 #Using spectral decomposition instead of SVD
-sum(princomp(stock)$sdev)
+princomp(stock)$sdev ^ 2
+sum(princomp(stock)$sdev ^ 2)
 summary(princomp(stock))
 ```
 As we can see from above, the cumulative proportion of variance explained by the first 3 variables is 0.899 percent. 
 c.)
-c.)
+```{r}
+lambda1_lower <- princomp(stock)$sdev[1]^2 - qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[1,1] / nrow(stock))
+lambda1_upper <- princomp(stock)$sdev[1]^2 + qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[1,1] / nrow(stock))
+c(lambda1_lower, lambda1_upper)
+
+lambda2_lower <- princomp(stock)$sdev[2]^2 - qt(0.1/(2*3), nrow(stock) - 1, lower.tail = FALSE) * sqrt(cov(stock)[2,2] / nrow(stock))
+lambda2_upper <- princomp(stock)$sdev[2]^2 + qt(0.1/(2*3), nrow(stock) - 1, lower.tail = FALSE) * sqrt(cov(stock)[2,2] / nrow(stock))
+c(lambda2_lower, lambda2_upper)
+
+lambda3_lower <- princomp(stock)$sdev[3]^2 - qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[3,3] / nrow(stock))
+lambda3_upper <- princomp(stock)$sdev[3]^2 + qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[3,3] / nrow(stock))
+c(lambda3_lower, lambda3_upper)
+```
+d.) Given the high cumuluative proportion of variance explained by the first 2 variables, it would be logical to conclude that we could summarize stock prices in two dimensions. 
+
+## P3
+8.22.)
+
+```{r}
+bulls <- read.table("~/GitHub/STA135/Homework/HW5/T1-10.dat")
+names(bulls) <- c("Breed", "SalePr", "YrHgt", "FtFrBody", "PrctFFB", "Frame", "BkFat", "SaleHt", "SaleWt")
+breed <- bulls[,1]
+bulls <- bulls[,-c(1, 2)]
+bulls
+
+pca.bulls <- princomp(bulls)
+
+summary(princomp(bulls))
+
+plot(pca.bulls)
+```
+
+By looking at the cumulative proportion of our components, we can logically conclude that we only need at most two components, which explain over 99% of the variability in the data.
+
+b.) We can think of the first component as one regarding the size of a bull, where we have information about the body fat, frame, etc. The other component we can think to summaraize the information regarding the bull at time of sale, in this case the sale height and weight. 
+
+c.)We can use the first principal component to  create a body size index. 
+
+d.)
+```{r}
+# http://www.sthda.com/english/wiki/ggfortify-extension-to-ggplot2-to-handle-some-popular-packages-r-software-and-data-visualization
+library(ggfortify)
+bulls$Breed <- breed
+plot <- autoplot(pca.bulls, loadings = TRUE, loadings.label = TRUE, data = bulls, colour = "Breed") + labs(colour = breed)
+#plot
+library(plotly)
+ggplotly(plot)
+```
+
+With the plot we can see that there is no clear clustering forming for breeds, most overlap. One notable outlier is in the top right of our scatter plot, with high values in both components, coming from Breed 8. 
+
+e.)
+```{r}
+library(car)
+qqPlot(prcomp(bulls)$x[,1])
+```
+
+We can see here that the residuals for the first PCA component from our data is approximately normal. 
+
+## P4
+9.1.) 
+```{r}
+rho <- matrix(c(1, .63, .45, .63, 1, .35, .45, .35, 1), nrow = 3, ncol = 3)
+psi <- matrix(c(.19, 0, 0, 0, .51, 0, 0,0, .75), nrow = 3, ncol = 3)
+L = c(.9, .7, .5)
+L %*% t(L) + psi
+#Confirm that they are equal
+setequal(rho, L %*% t(L) + psi)
+```
+9.2.)
+a.)
+```{r}
+
+
+```
