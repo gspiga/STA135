@@ -2,7 +2,9 @@
 title: "Homework 4"
 author: "Gianni Spiga"
 date: "5/10/2022"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ### P1 
@@ -417,34 +419,34 @@ SStol <- SSmean1 + SSfac1_1 + SSfac2_1 + SSres1
 SStol
 ```
 
-```{r}
-xbar <- matrix(xbar2, nrow = 3, ncol = 4)
-xbar
-
-factef1 <- rowMeans(tr2) - matrix(xbar2, nrow = 3, ncol = 4)
-factef1
-
-factef2 <- matrix(c(rep(colMeans(tr2) - xbar2, 3)), nrow = 3, ncol = 4, byrow = TRUE) 
-factef2
-
-resid2 <- tr2 - factef1 - factef2 - xbar
-resid2
-
-
-SSmean2 <- sum(xbar^2)
-SSmean2
-
-SSfac1_2 <- sum(factef1^2)
-SSfac1_2
-
-SSfac2_2 <- sum(factef2^2)
-SSfac2_2
-
-SSres2 <- sum(resid2 ^2)
-SSres2
-
-SStol <- SSmean2 + SSfac1_2 + SSfac2_2 + SSres2
-SStol
+```{r, echo = FALSE}
+# xbar <- matrix(xbar2, nrow = 3, ncol = 4)
+# xbar
+# 
+# factef1 <- rowMeans(tr2) - matrix(xbar2, nrow = 3, ncol = 4)
+# factef1
+# 
+# factef2 <- matrix(c(rep(colMeans(tr2) - xbar2, 3)), nrow = 3, ncol = 4, byrow = TRUE) 
+# factef2
+# 
+# resid2 <- tr2 - factef1 - factef2 - xbar
+# resid2
+# 
+# 
+# SSmean2 <- sum(xbar^2)
+# SSmean2
+# 
+# SSfac1_2 <- sum(factef1^2)
+# SSfac1_2
+# 
+# SSfac2_2 <- sum(factef2^2)
+# SSfac2_2
+# 
+# SSres2 <- sum(resid2 ^2)
+# SSres2
+# 
+# SStol <- SSmean2 + SSfac1_2 + SSfac2_2 + SSres2
+# SStol
 ```
 ```{r}
 SCPmean <-
@@ -468,24 +470,31 @@ SCPtot
 
 b.)
 ```{r}
-tr1_13 <- matrix(c(6, 4, 8, 2, 3, -3, 4, -4, -3, -4, 3, -4), nrow = 3, ncol = 4, byrow = TRUE)
-tr1_13
-
-tr2_13 <- matrix(c(8,6,12,6,8,2,3,3,2,-5,-3,-6), nrow = 3, ncol = 4, byrow = TRUE)
-tr2_13
-
-tr1_14 <- matrix(c(14, 6, 8, 16, 1, 5, 0, 2, 3, -2, -11, -6), nrow = 3, ncol = 4, byrow = TRUE)
-tr1_14
-
-tr2_14 <- matrix(c(8, 2, 2, -4, 6, 12, 15, 7 , -2, 7, 1, 6), nrow = 3, ncol = 4, byrow = TRUE)
-tr2_14
-
-
-tr1 <- (tr1_13 + tr1_14) #/ 2
-tr1
-
-tr2 <- (tr2_13 + tr2_14) #/ 2
-tr2
+# tr1_13 <- matrix(c(6, 4, 8, 2, 3, -3, 4, -4, -3, -4, 3, -4), nrow = 3, ncol = 4, byrow = TRUE)
+# tr1_13
+# 
+# tr2_13 <- matrix(c(8,6,12,6,8,2,3,3,2,-5,-3,-6), nrow = 3, ncol = 4, byrow = TRUE)
+# tr2_13
+# 
+# tr1_14 <- matrix(c(14, 6, 8, 16, 1, 5, 0, 2, 3, -2, -11, -6), nrow = 3, ncol = 4, byrow = TRUE)
+# tr1_14
+# 
+# tr2_14 <- matrix(c(8, 2, 2, -4, 6, 12, 15, 7 , -2, 7, 1, 6), nrow = 3, ncol = 4, byrow = TRUE)
+# tr2_14
+# 
+# 
+# tr1 <- (tr1_13 + tr1_14) #/ 2
+# tr1
+# 
+# tr2 <- (tr2_13 + tr2_14) #/ 2
+# tr2
+# 
+# 
+# 
+# tr1 <- matrix(c(14, 6, 8, 16, 1, 5, 0, 2, 3, -2, -11, -6), nrow = 3, ncol = 4, byrow = TRUE)
+# tr1
+# tr2 <- matrix(c(8, 2, 2, -4, 6, 12, 15, 7 , -2, 7, 1, 6), nrow = 3, ncol = 4, byrow = TRUE)
+# tr2
 ```
 ```{r}
 xbar1 <- mean(tr1)
@@ -522,6 +531,105 @@ SStol <- SSmean1 + SSfac1_1 + SSfac2_1 + SSres1
 SStol
 ```
 
+```{r}
+xbar <- matrix(xbar2, nrow = 3, ncol = 4)
+xbar
+
+factef1 <- rowMeans(tr2) - matrix(xbar2, nrow = 3, ncol = 4)
+factef1
+
+factef2 <- matrix(c(rep(colMeans(tr2) - xbar2, 3)), nrow = 3, ncol = 4, byrow = TRUE) 
+factef2
+
+resid2 <- tr2 - factef1 - factef2 - xbar
+resid2
+
+
+SSmean2 <- sum(xbar^2)
+SSmean2
+
+SSfac1_2 <- sum(factef1^2)
+SSfac1_2
+
+SSfac2_2 <- sum(factef2^2)
+SSfac2_2
+
+SSres2 <- sum(resid2 ^2)
+SSres2
+
+SStol <- SSmean2 + SSfac1_2 + SSfac2_2 + SSres2
+SStol
+```
+```{r}
+xbar <- matrix(xbar2, nrow = 3, ncol = 4)
+xbar
+
+factef1 <- rowMeans(tr2) - matrix(xbar2, nrow = 3, ncol = 4)
+factef1
+
+factef2 <- matrix(c(rep(colMeans(tr2) - xbar2, 3)), nrow = 3, ncol = 4, byrow = TRUE) 
+factef2
+
+resid2 <- tr2 - factef1 - factef2 - xbar
+resid2
+
+
+SSmean2 <- sum(xbar^2)
+SSmean2
+
+SSfac1_2 <- sum(factef1^2)
+SSfac1_2
+
+SSfac2_2 <- sum(factef2^2)
+SSfac2_2
+
+SSres2 <- sum(resid2 ^2)
+SSres2
+
+SStol <- SSmean2 + SSfac1_2 + SSfac2_2 + SSres2
+SStol
+
+```
+c.)
+```{r}
+-1 * ((nrow(tr1) - 1)*(ncol(tr1) - 1) - (((2 + 1) - (nrow(tr1) - 1))/2) ) * log(det(resid)/ det(fac1 + resid))
+
+#Critical Value
+qchisq(.05, 4, lower.tail = FALSE)
+
+
+-1 * ((nrow(tr2) - 1)*(ncol(tr2) - 1) - (((2 + 1) - (ncol(tr2) - 1))/2) ) * log(det(resid)/ det(fac2 + resid))
+
+#Critical Value
+qchisq(.05, (nrow(tr2) - 1)*(ncol(tr2) - 1), lower.tail = FALSE)
+
+```
+We reject the null hypothesis for factor 1  however we fail to reject factor 2. We can conclude that the factor 1 effect is non zero but we cannot conclude that factor 2 effects are non zero. 
+
+```{r}
+cat("Factor 1 \n")
+fac1 <- matrix(c(SSfac1_1, SCPfac1, SCPfac1, SSfac1_2), nrow = 2, ncol = 2)
+fac1
+dfFac1 <- nrow(tr1)-1
+dfFac1
+
+cat("Factor 2 \n")
+fac2 <- matrix(c(SSfac2_1, SCPfac2, SCPfac2, SSfac2_2), nrow = 2, ncol = 2)
+fac2
+dfFac2 <- ncol(tr1)-1
+dfFac2
+
+cat("Residuals \n")
+resid <- matrix(c(SSres1, SCPres, SCPres, SSres2), nrow = 2, ncol = 2)
+resid
+dfresid <- (nrow(tr1)-1) * (ncol(tr1)-1)
+dfresid
+
+cat("Total \n")
+fac1 + fac2 + resid
+#df
+nrow(tr1) * ncol(tr1) - 1
+```
 # 6.19.)
 
 a.)
@@ -563,7 +671,7 @@ We can see from our solution vector that the variable with the highest absolute 
 c.)
 ```{r}
 lowerCI <- t(diag(p))%*%(xbar1 - xbar2) - sqrt(critval) * sqrt(diag((t(diag(p))%*%Spool%*%diag(p))*(1/n1 + 1/n2)))
-upperCI <- t(diag(p))%*%(xbar1 - xbar2) + sqrt(critval * sqrt(diag((t(diag(p))%*%Spool%*%diag(p))*(1/n1 + 1/n2))))
+upperCI <- t(diag(p))%*%(xbar1 - xbar2) + sqrt(critval) * sqrt(diag((t(diag(p))%*%Spool%*%diag(p))*(1/n1 + 1/n2)))
 
 results <- as.data.frame(cbind(lowerCI, upperCI), 
                      row.names = c("Fuel", "Repair", "Capital"))

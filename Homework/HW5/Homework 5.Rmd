@@ -77,19 +77,20 @@ summary(princomp(stock))
 As we can see from above, the cumulative proportion of variance explained by the first 3 variables is 0.899 percent. 
 c.)
 ```{r}
-lambda1_lower <- princomp(stock)$sdev[1]^2 - qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[1,1] / nrow(stock))
-lambda1_upper <- princomp(stock)$sdev[1]^2 + qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[1,1] / nrow(stock))
+#pdf pg 456-457
+lambda1_lower <- princomp(stock)$sdev[1]^2 / (1+  qnorm(0.1/(2*3), lower.tail = FALSE) * sqrt(2/ nrow(stock)))
+lambda1_upper <- princomp(stock)$sdev[1]^2 / (1 -  qnorm(0.1/(2*3), lower.tail = FALSE) * sqrt(2/ nrow(stock)))
 c(lambda1_lower, lambda1_upper)
 
-lambda2_lower <- princomp(stock)$sdev[2]^2 - qt(0.1/(2*3), nrow(stock) - 1, lower.tail = FALSE) * sqrt(cov(stock)[2,2] / nrow(stock))
-lambda2_upper <- princomp(stock)$sdev[2]^2 + qt(0.1/(2*3), nrow(stock) - 1, lower.tail = FALSE) * sqrt(cov(stock)[2,2] / nrow(stock))
+lambda2_lower <- princomp(stock)$sdev[2]^2 / (1+  qnorm(0.1/(2*3), lower.tail = FALSE) * sqrt(2/ nrow(stock)))
+lambda2_upper <- princomp(stock)$sdev[2]^2 / (1-  qnorm(0.1/(2*3), lower.tail = FALSE) * sqrt(2/ nrow(stock)))
 c(lambda2_lower, lambda2_upper)
 
-lambda3_lower <- princomp(stock)$sdev[3]^2 - qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[3,3] / nrow(stock))
-lambda3_upper <- princomp(stock)$sdev[3]^2 + qt(0.1/(2*3), nrow(stock)-1, lower.tail = FALSE) * sqrt(cov(stock)[3,3] / nrow(stock))
+lambda3_lower <- princomp(stock)$sdev[3]^2 / (1+  qnorm(0.1/(2*3), lower.tail = FALSE) * sqrt(2/ nrow(stock)))
+lambda3_upper <- princomp(stock)$sdev[3]^2 / (1 -  qnorm(0.1/(2*3), lower.tail = FALSE) * sqrt(2/ nrow(stock)))
 c(lambda3_lower, lambda3_upper)
 ```
-d.) Given the high cumuluative proportion of variance explained by the first 2 variables, it would be logical to conclude that we could summarize stock prices in two dimensions. 
+d.) Given the high cumulative proportion of variance explained by the first 2 variables, it would be logical to conclude that we could summarize stock prices in two dimensions. 
 
 ## P3
 8.22.)
