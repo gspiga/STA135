@@ -155,3 +155,5 @@ h2
 b.)
 
 By equation 9.5, we know that the $Cov(X_i , F_j) = l_{ij}$, in this case $[.9, .7, .5]$ Z1 carries the greatest weight on F1, since it has the largest correlation. 
+
+hi
