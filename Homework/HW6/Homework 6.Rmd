@@ -1,0 +1,64 @@
+---
+title: "Homework 6"
+author: "Gianni Spiga"
+date: "5/31/2022"
+output: html_document
+---
+
+### P1 10.2 
+a.)
+```{r}
+Sigma11 <- matrix(c(8, 2, 2, 5), nrow = 2, ncol = 2)
+Sigma22 <- matrix(c(6, -2, -2, 7), nrow = 2, ncol = 2)
+Sigma12 <- matrix(c(3, -1, 1, 3), nrow = 2, ncol = 2)
+Sigma21 <- matrix(c(3, 1, -1, 3), nrow = 2, ncol = 2)
+
+library(expm)
+#From tb page 542
+matmul <-
+  solve(sqrtm(Sigma11)) %*% Sigma12 %*% solve(Sigma22) %*% Sigma21 %*% solve(sqrtm(Sigma11))
+#matmul
+
+matmul2 <-
+  solve(sqrtm(Sigma22)) %*% Sigma21 %*% solve(Sigma11) %*% Sigma12 %*% solve(sqrtm(Sigma22))
+#matmul
+
+evSigma2 <- eigen(matmul2)
+
+evSigma <- eigen(matmul)
+cat("The canonical correlations for rho1* and rho2* are ",
+    sqrt(evSigma$values)) 
+``` 
+
+b.)
+```{r}
+U1 <- evSigma$vectors[,1] %*% solve(sqrtm(Sigma11))
+U1
+V1 <- evSigma2$vectors[,1] %*% solve(sqrtm(Sigma22))
+V1
+
+U2 <- evSigma$vectors[,2] %*% solve(sqrtm(Sigma11))
+U2
+V2 <- evSigma2$vectors[,2] %*% solve(sqrtm(Sigma22))
+V2
+```
+c.)
+```{r}
+U = t(evSigma$vectors) %*% solve(sqrtm(Sigma11)) %*% c(-3, 2)
+U
+
+V = t(evSigma2$vectors) %*% solve(sqrtm(Sigma22)) %*% c(0, 1)
+
+cat("E(U/V) is ", rbind(U,V))
+
+covUV11 <-  round(t(evSigma$vectors) %*% solve(sqrtm(Sigma11)) %*% Sigma11 %*% solve(sqrtm(Sigma11)) %*% evSigma$vectors, 4)
+covUV11
+
+covUV12 <-  round(t(evSigma$vectors) %*% solve(sqrtm(Sigma11)) %*% Sigma12 %*% solve(sqrtm(Sigma22)) %*% evSigma2$vectors, 4)
+covUV21 <- covUV12
+covUV21
+covUV12
+
+covUV22 <-  round(t(evSigma2$vectors) %*% solve(sqrtm(Sigma22)) %*% Sigma22 %*% solve(sqrtm(Sigma22)) %*% evSigma2$vectors, 4)
+covUV22
+```
