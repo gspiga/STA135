@@ -62,3 +62,43 @@ covUV12
 covUV22 <-  round(t(evSigma2$vectors) %*% solve(sqrtm(Sigma22)) %*% Sigma22 %*% solve(sqrtm(Sigma22)) %*% evSigma2$vectors, 4)
 covUV22
 ```
+
+### P2 11.10
+a.)
+```{r}
+xbar1 <- c(-1,-1)
+xbar2 <- c(2, 1)
+n1 <- 11
+n2 <- 12
+
+
+Spool <- matrix(c(7.3,-1.1,-1.1, 4.8), nrow = 2, ncol = 2)
+T2 <-
+  (xbar1 - xbar2) %*% solve(((1 / n1) + (1 / n2)) * Spool) %*% (xbar1 - xbar2)
+T2
+
+critval <-
+  (((n1 + n2  - 2) * 2) / (n1 + n2 - 2 - 1)) * qf(0.1, 2, n1 + n2 - 2, lower.tail = FALSE)
+critval
+```
+Since our $T_2$ is greater than our critical value, we reject our null hypothesis at alpha equals 0.1. 
+
+b.) 
+
+```{r}
+#11-19
+fish <- (xbar1 - xbar2) %*% solve(Spool)
+fish
+```
+$ \hat{y_0} = \hat{a}x_0 = -.491x_1 - .529x_2$
+
+c.)
+```{r}
+m <- 0.5 * (xbar1 - xbar2) %*% solve(Spool) %*% (xbar1 + xbar2)
+m
+
+x0 <- c(0,1)
+sum(fish * x0) + m
+```
+Since our classifier value is less than 0, we assign $x_0$ it to population 2 ($\pi_2$). 
+
