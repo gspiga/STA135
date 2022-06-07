@@ -1,0 +1,59 @@
+---
+title: "Homework 7"
+author: "Gianni Spiga"
+date: "6/3/2022"
+output: html_document
+---
+
+### P2 12.7
+```{r}
+corr <-
+  matrix(
+    c(
+      1,
+      0.63,
+      .51,
+      .12,
+      .16,
+      .63,
+      1,
+      .57,
+      .32,
+      .21,
+      .51,
+      .57,
+      1,
+      .18,
+      .15,
+      .12,
+      .32,
+      .18,
+      1,
+      .68,
+      .16,
+      .21,
+      .15,
+      .68,
+      1
+    ),
+    nrow = 5
+  )
+corr
+```
+```{r, echo = FALSE}
+library(ggdendro)
+library(tidyverse)
+library(plotly)
+```
+
+```{r}
+dist <- as.dist(1 - corr)
+
+#Single
+tree <- hclust(dist, method = "average")
+ggplotly(ggdendrogram(tree))
+
+#Complete
+tree <- hclust(dist, method = "complete")
+ggplotly(ggdendrogram(tree))
+```
