@@ -1,0 +1,25 @@
+---
+title: "Final Project"
+author: "Gianni Spiga"
+date: "6/6/2022"
+output: html_document
+---
+
+```{r}
+#Picking a very random seed 
+set.seed(503650269)
+
+skull <- read.table("~/GitHub/STA135/Final Project/Data/T6-13.dat")
+colnames(skull) <- c("MaxBreath", "BasHeight", "BasLength", "NasHeight", "Time Period")
+skull
+
+
+skullSamp1 <- skull[sample(1:30, 15), ]
+skullSamp1
+
+skullSamp2 <- skull[sample(31:60, 15), ]
+skullSamp2
+
+skullSamp3 <- skull[sample(61:90, 15), ]
+skullSamp3
+```
