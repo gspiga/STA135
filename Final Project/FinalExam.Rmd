@@ -67,25 +67,67 @@ b.)
 colMeans(skullSamp1)
 colMeans(skullSamp2)
 colMeans(skullSamp3)
-
 ```
 We can see from the column means that the average Base height stays about the same, however in other variavles such as Max Breath and Nas Height, time period 2 is less than time periods 1 and 3. 
 
 ## P2
+a.)
 ```{r}
 library(readxl)
 word <-
   read_excel("~/GitHub/STA135/Final Project/Data/wordparity.xlsx")
+#Randomly sample 20 columns
+word <- word[sample(nrow(word), 20),]
 word
 
-wordCompare <- word$worddiff - word$wordsame
-wordCompare
 
+#Hotellings for same v different
+# Different
+diff <- word[,c(1,3)]
+xbarDiff <- colMeans(diff)
+S1diff <- cov(diff)
 
+# Same
+same <- word[,c(2,4)]
+xbarSame <- colMeans(same)
+S2same <- cov(same)
 
-#T2words <- 
+Spool <- ((nrow(diff) - 1) / (nrow(diff) + nrow(same) - 2)) * S1diff  + ((nrow(same) - 1) / (nrow(diff) + nrow(same) - 2)) * S2same
+
+T2words <- (xbarDiff - xbarSame) %*% solve(((1 / nrow(diff)) +  (1/nrow(same))) * Spool) %*% (xbarDiff - xbarSame)
+T2words
+
+#Now calculate crit val
+# We will assume alpha = 0.05
+critval_words <- ((nrow(diff) + nrow(same) - 2) * ncol(diff)) / (nrow(diff) + nrow(same) - ncol(word) - 1) * qf(0.05, ncol(diff), (nrow(diff) + nrow(same) - ncol(word) - 1), lower.tail = FALSE)
+critval_words
 ```
+Since our $T^2$ is greater than our critical value, we  reject our null hypothesis $H_0$. We have evidence to believe that there is a significant difference between the means of reaction times for type 'same' and type 'different'. 
 
+b.)
+```{r}
+#Hotellings for Arabic v word
+# Different
+written <- word[,c(1, 2)]
+xbarWrit <- colMeans(written)
+S1Writ <- cov(written)
+
+# Same
+arab <- word[,c(3,4)]
+xbarArab <- colMeans(arab)
+S2Arab <- cov(arab)
+
+Spool <- ((nrow(written) - 1) / (nrow(written) + nrow(arab) - 2)) * S1Writ  + ((nrow(arab) - 1) / (nrow(written) + nrow(arab) - 2)) * S2Arab
+
+T2type <- (xbarWrit - xbarArab) %*% solve(((1 / nrow(written)) +  (1/nrow(arab))) * Spool) %*% (xbarWrit - xbarArab)
+T2type
+
+#Now calculate crit val
+# We will assume alpha = 0.05
+critval_type <- ((nrow(written) + nrow(arab) - 2) * ncol(written)) / (nrow(written) + nrow(arab) - ncol(written) - 1) * qf(0.05, ncol(written), (nrow(written) + nrow(arab) - ncol(written) - 1), lower.tail = FALSE)
+critval_words
+
+```
 ## P3
 ```{r}
 census <- read.table("~/GitHub/STA135/Final Project/Data/T8-5.dat")
