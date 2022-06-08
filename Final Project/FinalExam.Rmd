@@ -5,12 +5,14 @@ date: "6/6/2022"
 output: html_document
 ---
 
+## P1
+a.)
 ```{r}
 #Picking a very random seed 
 set.seed(503650269)
 
 skull <- read.table("~/GitHub/STA135/Final Project/Data/T6-13.dat")
-colnames(skull) <- c("MaxBreath", "BasHeight", "BasLength", "NasHeight", "Time Period")
+colnames(skull) <- c("MaxBreath", "BasHeight", "BasLength", "NasHeight", "TimePeriod")
 skull
 
 
@@ -23,3 +25,72 @@ skullSamp2
 skullSamp3 <- skull[sample(61:90, 15), ]
 skullSamp3
 ```
+```{r}
+skullSamp <- rbind(skullSamp1, skullSamp2, skullSamp3)
+#skullSamp <- skullSamp[1:(length(skullSamp) - 1)]
+skullSamp
+
+model <- manova(cbind(skullSamp$MaxBreath, skullSamp$BasHeight, skullSamp$BasLength, skullSamp$NasHeight) ~ skullSamp$TimePeriod, data = skullSamp)
+model
+summary(model)
+results <- HoRM::SSCP.fn(model)
+results
+```
+
+```{r}
+# Sum of all residuals 
+#SSres  <- sum(model$residuals[,1]^2) + sum(model$residuals[,2]^2) + sum(model$residuals[,3]^2) + sum(model$residuals[,4]^2)
+SStrt <- results$SSCPR
+SSres <- results$SSCPE
+SStot <- results$SSCPTO
+
+wilks <- det(SSres) / det(SStot)
+wilks
+
+
+#Test stat
+testStat <- qf(0.05, df1 = 2 * ncol(skullSamp) - 1, df2 = 2*(nrow(skullSamp) - 4 - 2), lower.tail = FALSE)
+testStat
+
+#Last row of table on pg 303, g = 3, p >_ 1
+critval <- ((45 - 4 - 2) / 4) * ((1 - sqrt(wilks)) / sqrt(wilks)) 
+critval
+
+testStat > critval
+```
+
+Since our test statistic is larger than critical value, we reject $H_0$, concluding that at least one time period had significantly different skull dimensions than the others. 
+
+b.)
+
+```{r}
+colMeans(skullSamp1)
+colMeans(skullSamp2)
+colMeans(skullSamp3)
+
+```
+We can see from the column means that the average Base height stays about the same, however in other variavles such as Max Breath and Nas Height, time period 2 is less than time periods 1 and 3. 
+
+## P2
+```{r}
+library(readxl)
+word <-
+  read_excel("~/GitHub/STA135/Final Project/Data/wordparity.xlsx")
+word
+
+wordCompare <- word$worddiff - word$wordsame
+wordCompare
+
+
+
+#T2words <- 
+```
+
+## P3
+```{r}
+census <- read.table("~/GitHub/STA135/Final Project/Data/T8-5.dat")
+census
+
+
+```
+
